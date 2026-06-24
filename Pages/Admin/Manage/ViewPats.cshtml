@@ -1,0 +1,114 @@
+﻿@page
+@model CloudClinic.Pages.Admin.Manage.ViewPatsModel
+@section Scripts {
+    <!-- Jquery Core Js -->
+    <script src="~/admin/bundles/libscripts.bundle.js"></script>
+    <script src="~/admin/bundles/vendorscripts.bundle.js"></script>
+
+    <script src="~/admin/bundles/footable.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+    <script src="~/admin/bundles/mainscripts.bundle.js"></script>
+    <script src="~/admin/js/pages/tables/footable.js"></script><!-- Custom Js -->
+}
+
+<section class="content contact">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Patients</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Patient List</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+            </div>
+
+            <div>
+                <form id="pat-search-from">
+                    Year: <input asp-for="Year" type="number" />
+                    Month: <input asp-for="Month" type="number" min="1" max="12" />
+                    <input type="submit" onclick="submitForm('pat-search-from');" />
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 c_list c_table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th data-breakpoints="xs">Phone</th>
+                                        <th data-breakpoints="xs sm md">Email</th>
+                                        <th data-breakpoints="xs sm md">Address</th>
+                                        <th data-breakpoints="xs sm md">Guardian Name</th>
+                                        <th data-breakpoints="xs sm md">Gender</th>
+                                        <th data-breakpoints="xs sm md">Is Removed</th>
+                                        <th data-breakpoints="xs sm md">Reg. Date</th>
+                                        <th data-breakpoints="xs">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Pats != null)
+                                    {
+                                        @foreach (var pat in Model.Pats)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img src="@pat.ProfilePicUri" class="avatar w30" alt="">
+                                                    <p class="c_name">@pat.FullName</p>
+                                                </td>
+                                                <td>
+                                                    <span class="phone">
+                                                        <i class="zmdi zmdi-whatsapp mr-2"></i>
+                                                        @pat.PhoneNumber
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="email">
+                                                        <a href="javascript:void(0);" title="">
+                                                            @pat.Email
+                                                        </a>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <address>
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        @pat.Address
+                                                    </address>
+                                                </td>
+                                                <td>
+                                                    @pat.GuardianName
+                                                </td>
+                                                <td>
+                                                    @pat.Gender
+                                                </td>
+                                                <td>
+                                                    @pat.IsRemoved
+                                                </td>
+                                                <td>
+                                                    @pat.RegDate
+                                                </td>
+                                                <td>
+                                                    <a asp-page="ManagePat"
+                                                       asp-route-patId="@pat.PatId"
+                                                       class="btn btn-primary btn-sm">
+                                                        Edit
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

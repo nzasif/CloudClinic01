@@ -1,0 +1,6 @@
+@CloudClinic_HostAddress = http://localhost:5190
+
+GET {{CloudClinic_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

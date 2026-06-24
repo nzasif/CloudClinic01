@@ -1,0 +1,138 @@
+﻿@page "{drId}"
+@model CloudClinic.Admin.Pages.Manage.ManageDr
+
+<section class="content">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Dr. Detail</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-page="/"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Dr. Details</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+                <div class="col-lg-5 col-md-6 col-sm-12">
+                    <button class="btn btn-primary btn-icon float-right right_icon_toggle_btn" type="button"><i class="zmdi zmdi-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-xl-3 col-lg-4 col-md-12">
+                                    <div class="preview preview-pic tab-content">
+                                        <div class="tab-pane active">
+                                            <img src="@Model.Dr.DrProfilePicUri" class="img-fluid" alt="" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-9 col-lg-8 col-md-12">
+                                    <div class="product details">
+                                        <h3 class="product-title mb-0">@Model.Dr.DrName</h3>
+                                        <h5 class="price mt-0">@Model.Dr.DrSpecialty</h5>
+                                        <div class="rating">
+                                            <div class="stars">
+                                                <span class="zmdi zmdi-star col-amber"></span>
+                                                <span class="zmdi zmdi-star col-amber"></span>
+                                                <span class="zmdi zmdi-star col-amber"></span>
+                                                <span class="zmdi zmdi-star col-amber"></span>
+                                                <span class="zmdi zmdi-star-outline"></span>
+                                            </div>
+                                            <span class="m-l-10">Totel: @Model.Dr.Reviews.Count reviews</span>
+                                        </div>
+                                        <hr>
+                                        <p class="product-description">
+                                            He is from @Model.Dr.DrAddress and joined on <b>@Model.Dr.RegisterdDate</b>
+                                        </p>
+
+                                        @if (Model.Dr.IsVerified == false)
+                                        {
+                                            <p class="alert-info" style="padding: 10px; border-left: 4px red solid;">
+                                               <strong>UnVerification Cause: </strong> @Model.Dr.UnVerificationCause
+                                            </p>
+
+                                            <div class="action">
+                                                <a asp-page-handler="VerifyDr"
+                                                   asp-route-drId="@Model.Dr.DrId"
+                                                   class="btn btn-primary waves-effect">
+                                                    Verify
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.Dr.IsVerified)
+                {
+                    <div class="col-lg-12">
+                        <p>Unverify Dr.</p>
+                        <form asp-page-handler="unVerifyDr" method="post" id="dr-verification-form">
+                            <small>Removal Reason</small>
+                            <input type="hidden" asp-for="DrId" value="@Model.Dr.DrId" />
+                            <textarea class="form-control" asp-for="Cause"></textarea>
+                            <input type="submit"
+                                   onclick="submitForm('dr-verification-form')" />
+                        </form>
+                    </div>
+                }
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="body">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="review">
+                                    <ul class="row list-unstyled c_review mt-4">
+                                        <li class="nav-item">
+                                            <h4>Reviews</h4>
+                                        </li>
+                                        @if (Model.Dr.Reviews != null)
+                                        {
+                                            @foreach (var r in Model.Dr.Reviews)
+                                            {
+                                                <li class="col-12">
+                                                    <div class="avatar">
+                                                        <a href="javascript:void(0);">
+                                                            <img class="rounded" src="@r.PatProfilePic"
+                                                                 alt="user" width="60">
+                                                        </a>
+                                                    </div>
+                                                    <div class="comment-action">
+                                                        <h5 class="c_name">@r.PatName</h5>
+                                                        <p class="c_msg mb-0">
+                                                            @r.ReviewText
+                                                        </p>
+                                                        <span class="m-l-10">
+                                                            @for (int i = 0; i < r.Rating; i++)
+                                                            {
+                                                                <a href="javascript:void(0);">
+                                                                    <i class="zmdi zmdi-star col-amber"></i>
+                                                                </a>
+                                                            }
+                                                            <a href="javascript:void(0);">
+                                                                <i class="zmdi zmdi-star-outline text-muted"></i>
+                                                            </a>
+                                                        </span>
+                                                        <small class="comment-date float-sm-right">
+                                                            @r.date
+                                                        </small>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

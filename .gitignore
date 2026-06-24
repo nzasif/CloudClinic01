@@ -1,0 +1,45 @@
+# Build Folders
+bin/
+obj/
+
+# User-Specific Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+logs/
+
+# Dependency Directories
+node_modules/
+packages/
+
+# Environment Files
+.env
+.env.*
+
+# Configuration Files
+appsettings.Development.json
+appsettings.Local.json
+
+# IDE Settings
+.vscode/
+.idea/
+*.code-workspace
+
+# OS-Specific Files
+.DS_Store
+Thumbs.db
+
+# Generated Files
+wwwroot/lib/
+wwwroot/dist/
+
+# Entity Framework Migrations
+Migrations/
+
+# Publish Outputs
+publish/
+.vs/

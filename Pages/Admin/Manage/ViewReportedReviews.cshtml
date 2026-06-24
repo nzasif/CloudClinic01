@@ -1,0 +1,102 @@
+﻿@page "{reviewId?}"
+@model CloudClinic.Pages.Admin.Manage.ViewReportedReviewsModel
+@section Scripts {
+    <!-- Jquery Core Js -->
+    <script src="~/admin/bundles/libscripts.bundle.js"></script>
+    <script src="~/admin/bundles/vendorscripts.bundle.js"></script>
+
+    <script src="~/admin/bundles/footable.bundle.js"></script> <!-- Lib Scripts Plugin Js -->
+
+    <script src="~/admin/bundles/mainscripts.bundle.js"></script>
+    <script src="~/admin/js/pages/tables/footable.js"></script><!-- Custom Js -->
+}
+
+<section class="content contact">
+    <div class="body_scroll">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                    <h2>Reported Reviews</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="breadcrumb-item active">Reported Reviews</li>
+                    </ul>
+                    <button class="btn btn-primary btn-icon mobile_menu" type="button"><i class="zmdi zmdi-sort-amount-desc"></i></button>
+                </div>
+            </div>
+
+            <div>
+                <form id="rev-search-from">
+                    Year: <input asp-for="Year" type="number" />
+                    Month: <input asp-for="Month" type="number" />
+                    <input type="submit" onclick="submitForm('rev-search-from');" />
+                </form>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row clearfix">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 c_list c_table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th data-breakpoints="xs">Phone</th>
+                                        <th data-breakpoints="xs sm md">Address</th>
+                                        <th data-breakpoints="xs sm md">Review</th>
+                                        <th data-breakpoints="xs sm md">Is Visible</th>
+                                        <th data-breakpoints="xs sm md">Date</th>
+                                        <th data-breakpoints="xs">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ReportedReviews != null)
+                                    {
+                                        @foreach (var rev in Model.ReportedReviews)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <img src="@rev.ProfilePicUri" class="avatar w30" alt="">
+                                                    <p class="c_name">@rev.FullName</p>
+                                                </td>
+                                                <td>
+                                                    <span class="phone">
+                                                        <i class="zmdi zmdi-whatsapp mr-2"></i>
+                                                        @rev.PhoneNumber
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <address>
+                                                        <i class="zmdi zmdi-pin"></i>
+                                                        @rev.Address
+                                                    </address>
+                                                </td>
+                                                <td>
+                                                    @rev.ReviewText
+                                                </td>
+                                                <td>
+                                                    @rev.IsVisible
+                                                </td>
+                                                <td>
+                                                    @rev.ReviewDate
+                                                </td>
+                                                <td>
+                                                    <a asp-page-handler="ToggleVisibility"
+                                                       asp-route-reviewId="@rev.ReviewId"
+                                                       class="btn btn-primary btn-sm">
+                                                        Toggle Visibility
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

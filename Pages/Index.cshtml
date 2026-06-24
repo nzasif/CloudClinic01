@@ -1,0 +1,19 @@
+﻿@page
+@model CloudClinic.Pages.IndexModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "_AdminLayout"; // Assuming you have a _AdminLayout.cshtml
+}
+
+<div class="admin-container" style="text-align: center; margin-top: 50px;">
+    <h1>CloudClinic Administration</h1>
+    <p class="lead">Welcome to the management portal. Please authenticate to continue.</p>
+
+    <div class="login-box" style="margin-top: 30px;">
+        <a href="@Url.Page("Admin/Account/AdminLogin")"
+           class="btn btn-primary"
+           style="padding: 15px 30px; font-size: 1.2rem; background-color: #007bff; color: white; border-radius: 5px; text-decoration: none;">
+            Access Admin Dashboard
+        </a>
+    </div>
+</div>
