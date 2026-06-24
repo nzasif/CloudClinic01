@@ -1,6 +1,6 @@
 ﻿# CloudClinic
 
-CloudClinic is a robust medical management platform built with an **ASP.NET Core 8.0** backend and an **Angular** frontend. This system is designed to streamline healthcare workflows including user authentication, doctor-patient management, and clinical diagnostics.
+CloudClinic is a robust medical management platform built with an **ASP.NET Core 8.0** backend and an **Angular** frontend [ClientApp](https://github.com/nzasif/ClientApp). This system is designed to streamline healthcare workflows including user authentication, doctor-patient management, and clinical diagnostics.
 
 
 ## 🚀 Key Features
