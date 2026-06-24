@@ -178,7 +178,6 @@ If you encounter `System.ArgumentOutOfRangeException` during login, verify the b
 
 ## Common Commands
 
-- Start development server: `npm start`
 - Run via local CLI: `npx ng serve`
 - Build production bundle: `npm run build -- --prod`
 - Run unit tests: `npm test`
